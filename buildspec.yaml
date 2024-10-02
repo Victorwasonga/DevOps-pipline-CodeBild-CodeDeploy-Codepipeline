@@ -13,11 +13,14 @@ phases:
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
   build:
     commands:
-      - echo "Building the Docker image..."
-      - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/my-nginx-app:latest" .
-      - echo "Pushing the Docker image to the registry..."
-      - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/my-nginx-app:latest"
+      - echo "Building Docker image..."
+      - docker build -t "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest" .
+      - echo "Pushing Docker image..."
+      - docker push "$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest"
   post_build:
     commands:
-      - echo "Build and push completed successfully."
+      - echo "Build and push completed successfully!"
 
+artifacts:
+  files:
+    - '**/*'
